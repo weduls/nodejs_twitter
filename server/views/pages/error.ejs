@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Weduls Error </title>
+    <% include ../partials/stylesheet %>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%include ../partials/header %>
+    <div class="container">
+      <div class="page-header m-t-1">
+        <h1><%= message %></h1>
+        <h2><%= error.status %></h2>
+        <pre><%= error.stack %></pre>
+      </div>
+    </div>
+    <% include ../partials/footer %>
+    <% include ../partials/javascript %>
+  </body>
+</html>
