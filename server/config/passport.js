@@ -28,6 +28,8 @@ module.exports = (passport) => {
     passReqToCallback : true
   },
   function(req, email, password, done) {
+    console.log(email);
+    console.log(password);
     if (email) {
       email = email.toLowerCase();
     }
@@ -40,7 +42,7 @@ module.exports = (passport) => {
         if (!user) {
           return done(null, false, req.flash('loginMessage', 'No user found.'));
         }
-        if (!user.validPassword(password)) {
+        if (!user.validPassword(password, user.local.password)) {
           return done(null, false, req.flash('loginMessage', 'Wohh! Wrong password.'));
         } else {
           return done(null, user);

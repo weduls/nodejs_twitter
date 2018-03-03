@@ -6,12 +6,12 @@ var passport = require('passport');
 var gravatar = require('gravatar');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   res.render('index', {title: 'welcome'});
 });
 
 /* GET login page. */
-router.get('/login', function(req, res, next) {
+router.get('/login', function(req, res) {
   res.render('login/login', { message: req.flash('loginMessage') });
 });
 
@@ -24,19 +24,19 @@ router.post('/login', passport.authenticate('local-login', {
 }));
 
 /* GET join page. */
-router.get('/signup', function(req, res, next) {
+router.get('/signup', function(req, res) {
   res.render('login/signup', { message: req.flash('signupMessage') });
 });
 
 /* POST 메서드용 가입 처리 */
 router.post('/signup', passport.authenticate('local-signup', {
   successRedirect : '/profile',
-  failureRedirect : 'signup',
+  failureRedirect : '/signup',
   failureFlash : true
 }));
 
 /* GET profile page. */
-router.get('/profile', isLoggedIn, function(req, res, next) {
+router.get('/profile', isLoggedIn, function(req, res) {
   res.render('login/profile', { title: 'Profile Page', user: req.user, avatar: gravatar.url(req.user.email, {s: '100', r:'x', d: 'retro'}, true)});
 });
 

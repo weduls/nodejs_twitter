@@ -8,6 +8,10 @@ var sassMiddleware = require('node-sass-middleware');
 
 var index = require('./server/routes/index');
 var users = require('./server/routes/users');
+
+// 코멘트 컨트로러 불러오기
+var comments = require('./server/config/controller/comments');
+
 // 몽고 디비 ODM
 var mongoose = require('mongoose');
 // 세션 저장용 모듈 ( 로그인 후 유저정보를 세션에 저장하기 위해 사용하는 모듈 )
@@ -69,6 +73,9 @@ app.use(flash());
 
 app.use('/', index);
 app.use('/users', users);
+
+app.get('/comments', comments.hasAuthorization, comments.list);
+app.post('/comments', comments.hasAuthorization, comments.create); // path, condition, callback
 
 // catch 404 and forward to error handler ( 404 에러가 발생되면 에러 핸들러에 전송 )
 app.use(function(req, res, next) {

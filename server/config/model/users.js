@@ -18,8 +18,8 @@ userSchema.methods.generateHash = (password) => {
 };
 
 // 패스워드 유효체크
-userSchema.methods.validPassword = (password) => {
-  return bcrypt.compareSync(password, this.local.password);
+userSchema.methods.validPassword = (password, userPassword) => {
+  return bcrypt.compareSync(password, userPassword);
 };
 
 // user 모델을 생성하고 앱에 공개(expose)
